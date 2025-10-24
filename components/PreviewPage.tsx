@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { Presentation, Slide, InfographicData, InfographicType } from '../types';
 
-// -- Sub-components defined in the same file for cohesion --
-
-// Renders a simple, elegant bar chart placeholder
 const BarChart: React.FC<{ data: InfographicData }> = ({ data }) => {
   const maxValue = Math.max(...(data.values || [0]));
   return (
@@ -21,7 +18,6 @@ const BarChart: React.FC<{ data: InfographicData }> = ({ data }) => {
   );
 };
 
-// Renders a large statistic for impact
 const Statistic: React.FC<{ data: InfographicData }> = ({ data }) => (
   <div className="w-full h-full flex flex-col items-center justify-center text-center">
     <p className="font-serif text-7xl md:text-9xl font-bold">{data.value}<span className="text-5xl">{data.unit}</span></p>
@@ -29,7 +25,6 @@ const Statistic: React.FC<{ data: InfographicData }> = ({ data }) => (
   </div>
 );
 
-// Renders a minimalist timeline
 const Timeline: React.FC<{ data: InfographicData }> = ({ data }) => (
   <div className="w-full h-full p-8 flex flex-col justify-center">
       <h4 className="text-sm font-bold tracking-widest uppercase text-center mb-8">{data.title}</h4>
@@ -45,7 +40,6 @@ const Timeline: React.FC<{ data: InfographicData }> = ({ data }) => (
   </div>
 );
 
-// Dispatches to the correct infographic component
 const InfographicDisplay: React.FC<{ type: InfographicType; data: InfographicData }> = ({ type, data }) => {
   switch (type) {
     case 'bar chart': return <BarChart data={data} />;
@@ -55,8 +49,6 @@ const InfographicDisplay: React.FC<{ type: InfographicType; data: InfographicDat
   }
 };
 
-
-// Renders the full slide content within the modal
 const SlideDetailView: React.FC<{ slide: Slide }> = ({ slide }) => {
   const imageUrl = `https://picsum.photos/seed/${slide.image_prompt.replace(/[^a-zA-Z0-9]/g, '').slice(0, 10)}/1280/720`;
   const hasVisual = slide.layout.startsWith('visual') && slide.image_prompt;
@@ -106,7 +98,6 @@ const SlideDetailView: React.FC<{ slide: Slide }> = ({ slide }) => {
   );
 };
 
-// The modal component that displays the slide detail
 const SlideDetailModal: React.FC<{ slide: Slide; onClose: () => void }> = ({ slide, onClose }) => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -127,7 +118,6 @@ const SlideDetailModal: React.FC<{ slide: Slide; onClose: () => void }> = ({ sli
   );
 };
 
-// Thumbnail card for the main grid view
 const SlideCard: React.FC<{ slide: Slide; onClick: () => void }> = ({ slide, onClick }) => {
     const hasVisual = slide.layout.startsWith('visual') && slide.image_prompt;
     const imageUrl = `https://picsum.photos/seed/${slide.image_prompt.replace(/[^a-zA-Z0-9]/g, '').slice(0, 10)}/400/300`;
@@ -147,9 +137,6 @@ const SlideCard: React.FC<{ slide: Slide; onClick: () => void }> = ({ slide, onC
         </button>
     );
 };
-
-
-// -- Main Preview Page Component --
 
 interface PreviewPageProps {
   presentation: Presentation;

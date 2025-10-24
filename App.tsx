@@ -27,7 +27,6 @@ const App: React.FC = () => {
         throw new Error("The generated presentation was empty. Please try a different topic.");
       }
     } catch (err) {
-      console.error(err);
       setError(err instanceof Error ? err.message : 'An unknown error occurred.');
       setAppState('error');
     }

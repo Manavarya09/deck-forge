@@ -1,10 +1,7 @@
 import type { Presentation, Slide } from '../types';
-
-// The pptxgenjs library is loaded from a CDN, so we declare its type here.
 declare var PptxGenJS: any;
 
 const addSlideContent = (pptx: any, slide: any, slideData: Slide) => {
-    // For images, we use a placeholder service. A real implementation might use an image generation API.
     const imageUrl = `https://picsum.photos/seed/${slideData.image_prompt.replace(/[^a-zA-Z0-9]/g, '').slice(0, 10)}/1280/720`;
 
     const textOpts: any = {
@@ -58,9 +55,8 @@ export const exportToPptx = (presentation: Presentation, topic: string) => {
   
   const pptx = new PptxGenJS();
   
-  pptx.layout = 'LAYOUT_WIDE'; // 16:9
+  pptx.layout = 'LAYOUT_WIDE';
 
-  // Define title slide layout
   pptx.defineSlideMaster({
     title: 'TITLE_SLIDE',
     background: { color: 'FFFFFF' },
@@ -86,7 +82,6 @@ export const exportToPptx = (presentation: Presentation, topic: string) => {
     ],
   });
   
-  // Define content slide layout
   pptx.defineSlideMaster({
     title: 'CONTENT_SLIDE',
     background: { color: 'FFFFFF' },
